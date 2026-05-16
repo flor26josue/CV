@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Josué Flor | Diseñador Multimedia & Animador</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:       #0e0c14;
+    --paper:     #f5f2ee;
+    --accent:    #c8521a;
+    --accent2:   #3a2d6b;
+    --muted:     #7a7168;
+    --card:      #ffffff;
+    --border:    #e0dbd3;
+    --tag-bg:    #ede8e1;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── Noise texture overlay ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+  }
+
+  /* ── Typography ── */
+  h1, h2, h3, h4 { font-family: 'Syne', sans-serif; font-weight: 800; line-height: 1.1; }
+
+  /* ── Navigation ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(245,242,238,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── Hero ── */
+  .hero {
+    min-height: 92vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 2rem 4rem;
+  }
+  .hero-label {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-title {
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--accent);
+    display: block;
+  }
+  .hero-bio {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.9rem 2rem;
+    border-radius: 4px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1.5px solid var(--border);
+    color: var(--ink);
+    padding: 0.9rem 2rem;
+    border-radius: 4px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  /* ── Hero Photo ── */
+  .hero-photo {
+    position: relative;
+    animation: fadeIn 0.9s 0.2s ease both;
+  }
+  .photo-frame {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: var(--tag-bg);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .photo-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--muted);
+  }
+  .photo-placeholder svg { opacity: 0.4; }
+  .photo-placeholder p {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.6;
+  }
+  .photo-badge {
+    position: absolute;
+    bottom: -1.5rem;
+    left: -1.5rem;
+    background: var(--accent);
+    color: white;
+    padding: 1rem 1.25rem;
+    border-radius: 4px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1.3;
+  }
+  .photo-deco {
+    position: absolute;
+    top: -1.2rem;
+    right: -1.2rem;
+    width: 80px;
+    height: 80px;
+    border: 2px solid var(--accent2);
+    border-radius: 4px;
+    opacity: 0.3;
+  }
+
+  /* ── Section ── */
+  section { padding: 6rem 2rem; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 60px;
+  }
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    letter-spacing: -0.02em;
+    margin-bottom: 3rem;
+  }
+
+  /* ── Sobre Mí ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .about-quote {
+    font-size: 1.35rem;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--ink);
+    border-left: 3px solid var(--accent);
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .about-text { color: var(--muted); line-height: 1.85; margin-bottom: 2rem; }
+  .soft-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .soft-skills span {
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    color: var(--ink);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.4rem 0.9rem;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+  }
+  .info-block { margin-bottom: 1.25rem; }
+  .info-block dt {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 0.25rem;
+  }
+  .info-block dd {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .info-block dd a { color: var(--accent); text-decoration: none; }
+
+  /* ── Skills ── */
+  .skills-bg { background: var(--ink); }
+  .skills-bg .section-label { color: #c8a87a; }
+  .skills-bg .section-label::after { background: rgba(255,255,255,0.15); }
+  .skills-bg .section-title { color: var(--paper); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .skill-card {
+    background: var(--ink);
+    padding: 2rem;
+    transition: background 0.25s;
+  }
+  .skill-card:hover { background: #1a1624; }
+  .skill-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(200, 82, 26, 0.15);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .skill-icon svg { width: 20px; height: 20px; stroke: #c8521a; }
+  .skill-card h3 {
+    color: var(--paper);
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+  }
+  .skill-card p { color: rgba(245,242,238,0.45); font-size: 0.82rem; line-height: 1.6; }
+
+  /* ── Idiomas ── */
+  .lang-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .lang-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    color: var(--paper);
+    width: 80px;
+    font-size: 0.95rem;
+  }
+  .lang-level { font-size: 0.78rem; color: rgba(245,242,238,0.4); width: 80px; }
+  .lang-bar-bg { flex: 1; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; }
+  .lang-bar { height: 4px; background: var(--accent); border-radius: 2px; }
+
+  /* ── Portafolio ── */
+  .portfolio-filter {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+  .filter-btn {
+    background: none;
+    border: 1.5px solid var(--border);
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.45rem 1rem;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+  }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .portfolio-item {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border-radius: 4px;
+    background: var(--tag-bg);
+    cursor: pointer;
+  }
+  .portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    display: block;
+  }
+  .portfolio-item:hover img { transform: scale(1.06); }
+  .portfolio-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(14,12,20,0.9) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.25rem;
+  }
+  .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+  .portfolio-overlay h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem;
+    color: white;
+    font-weight: 700;
+  }
+  .portfolio-overlay span {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.55);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .port-cat-label {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    background: var(--accent);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+  }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(14,12,20,0.95);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .lightbox-close:hover { opacity: 1; }
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+  .lightbox-nav:hover { background: rgba(255,255,255,0.2); }
+  .lightbox-prev { left: 1rem; }
+  .lightbox-next { right: 1rem; }
+
+  /* ── Formación ── */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .edu-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .edu-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .edu-card-accent { border-top: 3px solid var(--accent); }
+  .edu-card .badge {
+    display: inline-block;
+    background: var(--tag-bg);
+    color: var(--muted);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+  .edu-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.35rem;
+  }
+  .edu-card .inst { color: var(--muted); font-size: 0.9rem; }
+
+  /* ── Contacto ── */
+  .contact-bg { background: var(--accent2); }
+  .contact-bg .section-label { color: rgba(245,242,238,0.6); }
+  .contact-bg .section-label::after { background: rgba(255,255,255,0.15); }
+  .contact-bg .section-title { color: var(--paper); }
+  .contact-sub { color: rgba(245,242,238,0.65); max-width: 480px; font-size: 1.05rem; line-height: 1.75; margin-bottom: 3rem; }
+  .contact-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+  .contact-list li a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--paper);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: opacity 0.2s;
+  }
+  .contact-list li a:hover { opacity: 0.7; }
+  .contact-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .contact-icon svg { width: 20px; height: 20px; stroke: white; }
+
+  /* ── Footer ── */
+  footer {
+    background: var(--ink);
+    color: rgba(245,242,238,0.4);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+  }
+  footer span { color: var(--accent); }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding-top: 3rem; }
+    .hero-photo { order: -1; max-width: 340px; margin: 0 auto; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 4rem 1.25rem; }
+    nav { padding: 0 1.25rem; }
+    .hero { padding: 4rem 1.25rem 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Josué<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">Sobre Mí</a></li>
+      <li><a href="#skills">Habilidades</a></li>
+      <li><a href="#portfolio">Portafolio</a></li>
+      <li><a href="#education">Formación</a></li>
+      <li><a href="#contact">Contacto</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<header>
+  <div class="hero">
+    <div class="hero-content">
+      <span class="hero-label">Diseñador Multimedia · Quito, Ecuador</span>
+      <h1 class="hero-title">
+        Diseño,
+        <em>animación</em>
+        &amp; visión.
+      </h1>
+      <p class="hero-bio">
+        Tecnólogo en Diseño Multimedia con expertise en ilustración digital, animación 2D/3D, edición audiovisual y creación de contenido. Transformo ideas en experiencias visuales memorables.
+      </p>
+      <div class="hero-actions">
+        <a href="#portfolio" class="btn-primary">Ver portafolio</a>
+        <a href="#contact" class="btn-outline">Contactar</a>
+      </div>
+    </div>
+
+    <div class="hero-photo">
+      <div class="photo-deco"></div>
+      <div class="photo-frame">
+        <img src="foto.jpg" alt="Josué Flor" loading="eager">
+      </div>
+      <div class="photo-badge">Disponible<br>para proyectos</div>
+    </div>
+  </div>
+</header>
+
+<!-- ── Sobre Mí ── -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-label">Sobre mí</p>
+    <div class="about-grid">
+      <div>
+        <blockquote class="about-quote">
+          "La comunicación visual no solo informa — emociona, conecta y queda en la memoria."
+        </blockquote>
+        <p class="about-text">
+          Soy un tecnólogo en Diseño Multimedia con formación sólida en creación de contenidos digitales. Me caracterizo por mi enfoque en la comunicación visual, el trabajo en equipo y la resolución creativa de problemas. Mi capacidad de adaptación a nuevas herramientas tecnológicas me permite mantenerme actualizado en un campo que evoluciona constantemente.
+        </p>
+        <p class="about-text">
+          Busco oportunidades donde mis conocimientos técnicos y artísticos contribuyan a proyectos multimedia con impacto real — desde ilustración y diseño gráfico hasta animación y producción audiovisual.
+        </p>
+        <div class="soft-skills">
+          <span>Creatividad e innovación</span>
+          <span>Trabajo en equipo</span>
+          <span>Aprendizaje autodidacta</span>
+          <span>Atención al detalle</span>
+          <span>Gestión de proyectos visuales</span>
+          <span>Calidad estética</span>
+        </div>
+      </div>
+      <div>
+        <dl>
+          <div class="info-block">
+            <dt>Ubicación</dt>
+            <dd>Quito – Tumbaco, Ecuador</dd>
+          </div>
+          <div class="info-block">
+            <dt>Teléfono</dt>
+            <dd><a href="tel:+593987931416">0987 931 416</a></dd>
+          </div>
+          <div class="info-block">
+            <dt>Correo electrónico</dt>
+            <dd><a href="mailto:flor26josue@gmail.com">flor26josue@gmail.com</a></dd>
+          </div>
+          <div class="info-block">
+            <dt>Formación</dt>
+            <dd>Tecnólogo Superior en Diseño Multimedia</dd>
+          </div>
+          <div class="info-block">
+            <dt>Idiomas</dt>
+            <dd>Español (Nativo) · Inglés (B2)</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Habilidades ── -->
+<section id="skills" class="skills-bg">
+  <div class="section-inner">
+    <p class="section-label">Expertise</p>
+    <h2 class="section-title">Habilidades técnicas</h2>
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <div class="skill-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>
+        </div>
+        <h3>Ilustración Digital &amp; Tradicional</h3>
+        <p>Creación de personajes, concept art e ilustraciones con dominio de técnicas digitales y análogas.</p>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
+        <h3>Diseño Gráfico</h3>
+        <p>Adobe Photoshop · Adobe Illustrator. Diseño visual para medios digitales e impresos.</p>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </div>
+        <h3>Edición de Video</h3>
+        <p>Adobe Premiere · After Effects · DaVinci Resolve. Producción y post-producción audiovisual.</p>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h3>Animación 2D</h3>
+        <p>Toon Boom. Animación cuadro a cuadro, rigging y producción de personajes animados.</p>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>Modelado &amp; Animación 3D</h3>
+        <p>Blender · Blockbench. Modelado, texturizado y animación básica tridimensional.</p>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+        </div>
+        <h3>Contenido para Redes &amp; Web</h3>
+        <p>Canva · estrategia visual para plataformas digitales. Fotografía y composición visual.</p>
+      </div>
+
+    </div>
+
+    <!-- Idiomas -->
+    <div style="margin-top: 4rem; max-width: 480px;">
+      <p class="section-label" style="color: rgba(200,168,122,0.8);">Idiomas</p>
+      <div class="lang-row">
+        <span class="lang-name">Español</span>
+        <div class="lang-bar-bg"><div class="lang-bar" style="width: 100%;"></div></div>
+        <span class="lang-level">Nativo</span>
+      </div>
+      <div class="lang-row">
+        <span class="lang-name">Inglés</span>
+        <div class="lang-bar-bg"><div class="lang-bar" style="width: 75%;"></div></div>
+        <span class="lang-level">Nivel B2</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Portafolio ── -->
+<section id="portfolio">
+  <div class="section-inner">
+    <p class="section-label">Trabajos</p>
+    <h2 class="section-title">Portafolio</h2>
+
+    <div class="portfolio-filter">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="character">Character Design</button>
+      <button class="filter-btn" data-filter="grafica">Gráfica</button>
+      <button class="filter-btn" data-filter="graphics">Graphics</button>
+      <button class="filter-btn" data-filter="fotografia">Fotografía</button>
+      <button class="filter-btn" data-filter="3d">Modelado 3D</button>
+    </div>
+
+    <div class="portfolio-grid" id="portfolioGrid">
+      <!-- Character Design (3 images) -->
+      <div class="portfolio-item" data-cat="character" data-src="PORTAFOLIO/Character_Design/character_1.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Character_Design/character_1.jpg" alt="Character Design 1" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Character</span>
+        <div class="portfolio-overlay"><h4>Diseño de Personaje</h4><span>Character Design</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="character" data-src="PORTAFOLIO/Character_Design/character_2.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Character_Design/character_2.jpg" alt="Character Design 2" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Character</span>
+        <div class="portfolio-overlay"><h4>Diseño de Personaje</h4><span>Character Design</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="character" data-src="PORTAFOLIO/Character_Design/character_3.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Character_Design/character_3.jpg" alt="Character Design 3" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Character</span>
+        <div class="portfolio-overlay"><h4>Diseño de Personaje</h4><span>Character Design</span></div>
+      </div>
+
+      <!-- Gráfica (13 images) -->
+      <div class="portfolio-item" data-cat="grafica" data-src="PORTAFOLIO/GRAFICA/grafica_1.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/GRAFICA/grafica_1.jpg" alt="Gráfica 1" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Gráfica</span>
+        <div class="portfolio-overlay"><h4>Diseño Gráfico</h4><span>Gráfica</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="grafica" data-src="PORTAFOLIO/GRAFICA/grafica_2.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/GRAFICA/grafica_2.jpg" alt="Gráfica 2" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Gráfica</span>
+        <div class="portfolio-overlay"><h4>Diseño Gráfico</h4><span>Gráfica</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="grafica" data-src="PORTAFOLIO/GRAFICA/grafica_3.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/GRAFICA/grafica_3.jpg" alt="Gráfica 3" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Gráfica</span>
+        <div class="portfolio-overlay"><h4>Diseño Gráfico</h4><span>Gráfica</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="grafica" data-src="PORTAFOLIO/GRAFICA/grafica_4.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/GRAFICA/grafica_4.jpg" alt="Gráfica 4" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Gráfica</span>
+        <div class="portfolio-overlay"><h4>Diseño Gráfico</h4><span>Gráfica</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="grafica" data-src="PORTAFOLIO/GRAFICA/grafica_5.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/GRAFICA/grafica_5.jpg" alt="Gráfica 5" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Gráfica</span>
+        <div class="portfolio-overlay"><h4>Diseño Gráfico</h4><span>Gráfica</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="grafica" data-src="PORTAFOLIO/GRAFICA/grafica_6.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/GRAFICA/grafica_6.jpg" alt="Gráfica 6" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Gráfica</span>
+        <div class="portfolio-overlay"><h4>Diseño Gráfico</h4><span>Gráfica</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="grafica" data-src="PORTAFOLIO/GRAFICA/grafica_7.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/GRAFICA/grafica_7.jpg" alt="Gráfica 7" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Gráfica</span>
+        <div class="portfolio-overlay"><h4>Diseño Gráfico</h4><span>Gráfica</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="grafica" data-src="PORTAFOLIO/GRAFICA/grafica_8.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/GRAFICA/grafica_8.jpg" alt="Gráfica 8" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Gráfica</span>
+        <div class="portfolio-overlay"><h4>Diseño Gráfico</h4><span>Gráfica</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="grafica" data-src="PORTAFOLIO/GRAFICA/grafica_9.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/GRAFICA/grafica_9.jpg" alt="Gráfica 9" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Gráfica</span>
+        <div class="portfolio-overlay"><h4>Diseño Gráfico</h4><span>Gráfica</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="grafica" data-src="PORTAFOLIO/GRAFICA/grafica_10.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/GRAFICA/grafica_10.jpg" alt="Gráfica 10" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Gráfica</span>
+        <div class="portfolio-overlay"><h4>Diseño Gráfico</h4><span>Gráfica</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="grafica" data-src="PORTAFOLIO/GRAFICA/grafica_11.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/GRAFICA/grafica_11.jpg" alt="Gráfica 11" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Gráfica</span>
+        <div class="portfolio-overlay"><h4>Diseño Gráfico</h4><span>Gráfica</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="grafica" data-src="PORTAFOLIO/GRAFICA/grafica_12.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/GRAFICA/grafica_12.jpg" alt="Gráfica 12" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Gráfica</span>
+        <div class="portfolio-overlay"><h4>Diseño Gráfico</h4><span>Gráfica</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="grafica" data-src="PORTAFOLIO/GRAFICA/grafica_13.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/GRAFICA/grafica_13.jpg" alt="Gráfica 13" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Gráfica</span>
+        <div class="portfolio-overlay"><h4>Diseño Gráfico</h4><span>Gráfica</span></div>
+      </div>
+
+      <!-- Graphics (11 images) -->
+      <div class="portfolio-item" data-cat="graphics" data-src="PORTAFOLIO/Graphics/graphics_1.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Graphics/graphics_1.jpg" alt="Graphics 1" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Graphics</span>
+        <div class="portfolio-overlay"><h4>Graphics</h4><span>Diseño Digital</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="graphics" data-src="PORTAFOLIO/Graphics/graphics_2.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Graphics/graphics_2.jpg" alt="Graphics 2" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Graphics</span>
+        <div class="portfolio-overlay"><h4>Graphics</h4><span>Diseño Digital</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="graphics" data-src="PORTAFOLIO/Graphics/graphics_3.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Graphics/graphics_3.jpg" alt="Graphics 3" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Graphics</span>
+        <div class="portfolio-overlay"><h4>Graphics</h4><span>Diseño Digital</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="graphics" data-src="PORTAFOLIO/Graphics/graphics_4.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Graphics/graphics_4.jpg" alt="Graphics 4" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Graphics</span>
+        <div class="portfolio-overlay"><h4>Graphics</h4><span>Diseño Digital</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="graphics" data-src="PORTAFOLIO/Graphics/graphics_5.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Graphics/graphics_5.jpg" alt="Graphics 5" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Graphics</span>
+        <div class="portfolio-overlay"><h4>Graphics</h4><span>Diseño Digital</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="graphics" data-src="PORTAFOLIO/Graphics/graphics_6.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Graphics/graphics_6.jpg" alt="Graphics 6" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Graphics</span>
+        <div class="portfolio-overlay"><h4>Graphics</h4><span>Diseño Digital</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="graphics" data-src="PORTAFOLIO/Graphics/graphics_7.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Graphics/graphics_7.jpg" alt="Graphics 7" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Graphics</span>
+        <div class="portfolio-overlay"><h4>Graphics</h4><span>Diseño Digital</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="graphics" data-src="PORTAFOLIO/Graphics/graphics_8.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Graphics/graphics_8.jpg" alt="Graphics 8" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Graphics</span>
+        <div class="portfolio-overlay"><h4>Graphics</h4><span>Diseño Digital</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="graphics" data-src="PORTAFOLIO/Graphics/graphics_9.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Graphics/graphics_9.jpg" alt="Graphics 9" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Graphics</span>
+        <div class="portfolio-overlay"><h4>Graphics</h4><span>Diseño Digital</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="graphics" data-src="PORTAFOLIO/Graphics/graphics_10.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Graphics/graphics_10.jpg" alt="Graphics 10" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Graphics</span>
+        <div class="portfolio-overlay"><h4>Graphics</h4><span>Diseño Digital</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="graphics" data-src="PORTAFOLIO/Graphics/graphics_11.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Graphics/graphics_11.jpg" alt="Graphics 11" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Graphics</span>
+        <div class="portfolio-overlay"><h4>Graphics</h4><span>Diseño Digital</span></div>
+      </div>
+
+      <!-- Fotografía (12 images) -->
+      <div class="portfolio-item" data-cat="fotografia" data-src="PORTAFOLIO/Fotografia/foto_1.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Fotografia/foto_1.jpg" alt="Fotografía 1" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Fotografía</span>
+        <div class="portfolio-overlay"><h4>Fotografía</h4><span>Composición Visual</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="fotografia" data-src="PORTAFOLIO/Fotografia/foto_2.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Fotografia/foto_2.jpg" alt="Fotografía 2" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Fotografía</span>
+        <div class="portfolio-overlay"><h4>Fotografía</h4><span>Composición Visual</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="fotografia" data-src="PORTAFOLIO/Fotografia/foto_3.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Fotografia/foto_3.jpg" alt="Fotografía 3" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Fotografía</span>
+        <div class="portfolio-overlay"><h4>Fotografía</h4><span>Composición Visual</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="fotografia" data-src="PORTAFOLIO/Fotografia/foto_4.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Fotografia/foto_4.jpg" alt="Fotografía 4" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Fotografía</span>
+        <div class="portfolio-overlay"><h4>Fotografía</h4><span>Composición Visual</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="fotografia" data-src="PORTAFOLIO/Fotografia/foto_5.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Fotografia/foto_5.jpg" alt="Fotografía 5" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Fotografía</span>
+        <div class="portfolio-overlay"><h4>Fotografía</h4><span>Composición Visual</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="fotografia" data-src="PORTAFOLIO/Fotografia/foto_6.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Fotografia/foto_6.jpg" alt="Fotografía 6" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Fotografía</span>
+        <div class="portfolio-overlay"><h4>Fotografía</h4><span>Composición Visual</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="fotografia" data-src="PORTAFOLIO/Fotografia/foto_7.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Fotografia/foto_7.jpg" alt="Fotografía 7" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Fotografía</span>
+        <div class="portfolio-overlay"><h4>Fotografía</h4><span>Composición Visual</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="fotografia" data-src="PORTAFOLIO/Fotografia/foto_8.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Fotografia/foto_8.jpg" alt="Fotografía 8" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Fotografía</span>
+        <div class="portfolio-overlay"><h4>Fotografía</h4><span>Composición Visual</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="fotografia" data-src="PORTAFOLIO/Fotografia/foto_9.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Fotografia/foto_9.jpg" alt="Fotografía 9" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Fotografía</span>
+        <div class="portfolio-overlay"><h4>Fotografía</h4><span>Composición Visual</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="fotografia" data-src="PORTAFOLIO/Fotografia/foto_10.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Fotografia/foto_10.jpg" alt="Fotografía 10" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Fotografía</span>
+        <div class="portfolio-overlay"><h4>Fotografía</h4><span>Composición Visual</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="fotografia" data-src="PORTAFOLIO/Fotografia/foto_11.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Fotografia/foto_11.jpg" alt="Fotografía 11" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Fotografía</span>
+        <div class="portfolio-overlay"><h4>Fotografía</h4><span>Composición Visual</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="fotografia" data-src="PORTAFOLIO/Fotografia/foto_12.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Fotografia/foto_12.jpg" alt="Fotografía 12" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">Fotografía</span>
+        <div class="portfolio-overlay"><h4>Fotografía</h4><span>Composición Visual</span></div>
+      </div>
+
+      <!-- Modelado 3D (3 images) -->
+      <div class="portfolio-item" data-cat="3d" data-src="PORTAFOLIO/Modelado_3D/3d_1.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Modelado_3D/3d_1.jpg" alt="3D 1" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">3D</span>
+        <div class="portfolio-overlay"><h4>Modelado 3D</h4><span>Blender · Blockbench</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="3d" data-src="PORTAFOLIO/Modelado_3D/3d_2.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Modelado_3D/3d_2.jpg" alt="3D 2" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">3D</span>
+        <div class="portfolio-overlay"><h4>Modelado 3D</h4><span>Blender · Blockbench</span></div>
+      </div>
+      <div class="portfolio-item" data-cat="3d" data-src="PORTAFOLIO/Modelado_3D/3d_3.jpg" onclick="openLightbox(this)">
+        <img src="PORTAFOLIO/Modelado_3D/3d_3.jpg" alt="3D 3" loading="lazy" onerror="this.style.display='none'">
+        <span class="port-cat-label">3D</span>
+        <div class="portfolio-overlay"><h4>Modelado 3D</h4><span>Blender · Blockbench</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)">&#8592;</button>
+  <img id="lightboxImg" src="" alt="">
+  <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1)">&#8594;</button>
+</div>
+
+<!-- ── Formación ── -->
+<section id="education" style="background: var(--tag-bg);">
+  <div class="section-inner">
+    <p class="section-label">Educación</p>
+    <h2 class="section-title">Formación académica</h2>
+
+    <div class="edu-grid">
+      <div class="edu-card edu-card-accent">
+        <span class="badge">Educación Superior</span>
+        <h3>Tecnología Superior en Diseño Multimedia</h3>
+        <p class="inst">Instituto Metropolitano de Diseño — La Metro</p>
+      </div>
+      <div class="edu-card">
+        <span class="badge">Bachillerato</span>
+        <h3>Bachillerato General Unificado (BGU)</h3>
+        <p class="inst">Ecuador</p>
+      </div>
+    </div>
+
+    <!-- Software Tools -->
+    <h3 style="font-size:1.2rem; margin-bottom:1.5rem; margin-top: 3rem; color: var(--muted); font-family: 'DM Sans', sans-serif; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem;">Herramientas y software</h3>
+    <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+      <span style="background: var(--card); border: 1px solid var(--border); padding: 0.5rem 1.1rem; border-radius: 3px; font-size: 0.85rem; font-weight: 500;">Adobe Photoshop</span>
+      <span style="background: var(--card); border: 1px solid var(--border); padding: 0.5rem 1.1rem; border-radius: 3px; font-size: 0.85rem; font-weight: 500;">Adobe Illustrator</span>
+      <span style="background: var(--card); border: 1px solid var(--border); padding: 0.5rem 1.1rem; border-radius: 3px; font-size: 0.85rem; font-weight: 500;">Adobe Premiere</span>
+      <span style="background: var(--card); border: 1px solid var(--border); padding: 0.5rem 1.1rem; border-radius: 3px; font-size: 0.85rem; font-weight: 500;">After Effects</span>
+      <span style="background: var(--card); border: 1px solid var(--border); padding: 0.5rem 1.1rem; border-radius: 3px; font-size: 0.85rem; font-weight: 500;">DaVinci Resolve</span>
+      <span style="background: var(--card); border: 1px solid var(--border); padding: 0.5rem 1.1rem; border-radius: 3px; font-size: 0.85rem; font-weight: 500;">Blender</span>
+      <span style="background: var(--card); border: 1px solid var(--border); padding: 0.5rem 1.1rem; border-radius: 3px; font-size: 0.85rem; font-weight: 500;">Blockbench</span>
+      <span style="background: var(--card); border: 1px solid var(--border); padding: 0.5rem 1.1rem; border-radius: 3px; font-size: 0.85rem; font-weight: 500;">Toon Boom</span>
+      <span style="background: var(--card); border: 1px solid var(--border); padding: 0.5rem 1.1rem; border-radius: 3px; font-size: 0.85rem; font-weight: 500;">Canva</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── Contacto ── -->
+<section id="contact" class="contact-bg">
+  <div class="section-inner">
+    <p class="section-label">Contacto</p>
+    <h2 class="section-title">Hablemos de tu<br>próximo proyecto.</h2>
+    <p class="contact-sub">
+      Estoy disponible para proyectos freelance, colaboraciones y oportunidades laborales en diseño multimedia, animación y producción visual.
+    </p>
+    <ul class="contact-list">
+      <li>
+        <a href="mailto:flor26josue@gmail.com">
+          <div class="contact-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 6 10-6"/></svg>
+          </div>
+          flor26josue@gmail.com
+        </a>
+      </li>
+      <li>
+        <a href="tel:+593987931416">
+          <div class="contact-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.29 12a19.79 19.79 0 01-3.07-8.67A2 2 0 013.2 1.27h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 9.17a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          0987 931 416
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <div class="contact-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          Quito – Tumbaco, Ecuador
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  © 2025 <span>Josué Flor</span> · Diseñador Multimedia · Quito, Ecuador
+</footer>
+
+<script>
+  // ── Portfolio Filter ──
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const items = document.querySelectorAll('.portfolio-item');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      items.forEach(item => {
+        if (filter === 'all' || item.dataset.cat === filter) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // ── Lightbox ──
+  let visibleItems = [];
+  let currentLbIndex = 0;
+
+  function openLightbox(el) {
+    visibleItems = Array.from(items).filter(i => i.style.display !== 'none');
+    currentLbIndex = visibleItems.indexOf(el);
+    updateLightboxImg();
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function lightboxNav(dir) {
+    currentLbIndex = (currentLbIndex + dir + visibleItems.length) % visibleItems.length;
+    updateLightboxImg();
+  }
+
+  function updateLightboxImg() {
+    const src = visibleItems[currentLbIndex].dataset.src;
+    document.getElementById('lightboxImg').src = src;
+  }
+
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+
+  document.addEventListener('keydown', e => {
+    const lb = document.getElementById('lightbox');
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') lightboxNav(1);
+    if (e.key === 'ArrowLeft') lightboxNav(-1);
+  });
+
+  // ── Scroll reveal ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.edu-card, .skill-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
